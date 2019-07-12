@@ -1,0 +1,137 @@
+
+                                                                         Eemeli Aro
+                                                                        @eemeli_aro
+
+
+
+
+
+MessageFormat: A language for human languages
+
+
+
+
+Good afternoon Eemeli!
+There are 2 more talks left on this 3rd day of PolyConf.
+
+
+
+
+-> ICU MessageFormat
+
+
+Good {tooearly, select,
+    true {morning}
+    other {afternoon}
+} {name}!
+There are {talks, plural,
+    =0 {no more talks}
+    one {1 more talk}
+    other {# more talks}
+} left on this {day, selectordinal,
+    one{#st}
+    two{#nd}
+    few{#rd}
+    other{#th}
+} day of {conference}.
+
+
+
+
+Argument types:
+- simple
+- select
+- plural
+- selectordinal
+- custom
+
+
+
+
+one? two? few? wat?
+
+-> plural categories
+
+-> Unicode Common Locale Data Repository
+
+-> Unicode Common Locale Data Markup Language (LDML) Language Plural Rules
+
+en:
+    cardinal:
+        one: i = 1 and v = 0
+
+    ordinal:
+        one: n % 10 = 1 and n % 100 != 11
+        two: n % 10 = 2 and n % 100 != 12
+        few: n % 10 = 3 and n % 100 != 13
+
++ 199 other languages
+
+
+
+
+LDML -> make-plural -> en(n, ord) -> plurals.js
+
+"Good ... day of {conference}." -> en.json
+
+    -> messageformat -> msg(params) -> messages.js
+    
+        -> Babel/Webpack -> dist.js -> browser
+
+            ->  msg({ tooearly: false, ... }) -> "Good afternoon ..."
+
+
+
+
+$ node
+
+> const MessageFormat = require('messageformat')
+
+> const msg = `Good ... day of {conference}.`
+
+> const mf = new MessageFormat('en').compile(msg)
+
+> mf({ tooearly: false, name: 'Eemeli', talks: 2, day: 3, conference: 'PolyConf' })
+
+Good afternoon Eemeli! There are 2 more talks left on this 3rd day of PolyConf.
+
+> console.log(mfunc.toString())
+
+function (d) {
+  return
+    "Good " + select(d.tooearly, {
+      true: "morning",
+      other: "afternoon"
+    }) + " " + d.name + "! There are " +
+    plural(d.talks, 0, en, {
+      "0": "no more talks",
+      one: "1 more talk",
+      other: number(d.talks, "talks") + " more talks"
+    }) + " left on this " + plural(d.day, 0, en, {
+      one: number(d.day, "day") + "st",
+      two: number(d.day, "day") + "nd",
+      few: number(d.day, "day") + "rd",
+      other: number(d.day, "day") + "th"
+    }, 1) + " day of " + d.conference + ".";
+}
+
+> const plurals = require('make-plural')
+
+> console.log(plurals.en.toString())
+
+function en(n, ord) {
+  var s = String(n).split('.'), v0 = !s[1], t0 = Number(s[0]) == n,
+      n10 = t0 && s[0].slice(-1), n100 = t0 && s[0].slice(-2);
+  if (ord) return (n10 == 1 && n100 != 11) ? 'one'
+      : (n10 == 2 && n100 != 12) ? 'two'
+      : (n10 == 3 && n100 != 13) ? 'few'
+      : 'other';
+  return (n == 1 && v0) ? 'one' : 'other';
+}
+
+> console.log(plurals.fr.toString())
+
+function fr(n, ord) {
+  if (ord) return (n == 1) ? 'one' : 'other';
+  return (n >= 0 && n < 2) ? 'one' : 'other';
+}
