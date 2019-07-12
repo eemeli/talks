@@ -177,7 +177,7 @@ pr.select(42)   // 'two' → '42nd'
 {name}’s photos
 ```
 
-```
+```sh
 {name} took {numPhotos, plural,
   =0 {no photos}
   one {one photo}
@@ -202,6 +202,21 @@ pr.select(42)   // 'two' → '42nd'
 ```
 
 _Alternatively, use `i18next-icu` for MessageFormat support_
+
+
+
+<small>Toby took 2566 photos on 10 July 2019</small>
+
+### Polyglot.js Translations
+
+```json
+{
+  "photos-title": "%{name}’s photos",
+  "photos": "one photo |||| %{numPhotos} photos",
+  "photos-taken":
+    "%{name} took %{photos_as_string} on %{timestamp_as_string}"
+}
+```
 
 ---
 
@@ -324,6 +339,22 @@ photos-taken: |
     =0 {no photos}
     one {one photo}
     other {{numPhotos, number} photos}
+  } on {timestamp, date, long}
+```
+
+
+
+<small>Toby took 2566 photos on 10 July 2019</small>
+
+### Messages in .properties
+
+```properties
+photos-title ={name}’s photos
+photos-taken = \
+  {name} took {numPhotos, plural, \
+    =0 {no photos} \
+    one {one photo} \
+    other {# photos} \
   } on {timestamp, date, long}
 ```
 
