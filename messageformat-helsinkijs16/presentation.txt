@@ -1,0 +1,228 @@
+
+
+    Eemeli Aro
+    eemeli@solu.co
+
+    Head of Product
+    Solu Machines
+                
+
+
+
+
+    Compiling human languages into JavaScript with messageformat.js
+
+            _or_
+
+    A cautionary tale of what can happen when you start a side project
+                
+
+
+
+
+
+
+
+
+
+
+
+ 1) Have free time
+                
+
+
+ 2) Decide to go to the 2012 World Science Fiction Convention (Worldcon) in Chicago
+                
+
+
+ 3) Notice that their mobile guide is not really all that good
+                
+
+
+ 4) Decide to write my own
+                
+
+
+ 5) Spend two weeks hacking it together, come up with KonOpas  =>  http://konopas.org/
+                
+
+
+ 6) Over the next few years, keep working at it, and get it used by ~50 conventions
+    and conferences    
+                
+
+
+ 7) Realise that inlining human language in your JavaScript is kind of stupid:
+
+        if (next_prog.length > 0) return '';
+        if (!ms_next) return 'There are no more program items scheduled.';
+
+        var start_str = '';
+        var t0 = new Date();
+        t0.setMinutes(t0.getMinutes() + t_off - t0.getTimezoneOffset());
+        var min_next = Math.floor((ms_next - t0) / 60000);
+        var h_next = Math.floor(min_next / 60);
+        if (h_next >= 1) {
+            min_next -= h_next * 60;
+            start_str += h_next + ' hour' + ((h_next == 1) ? '' : 's') + ' and ';
+        }
+        start_str += min_next + ' minute' + ((min_next == 1) ? '' : 's');
+        return 'The next program item starts in ' + start_str + ' after the set time.';
+                
+
+
+ 8) Find out about ICU MessageFormat
+
+        "Your {NUM, plural, one{message goes} other{messages go}} here."
+                
+ 
+
+ 9) Find a library that'll translate that to JavaScript  =>  messageformat.js
+                
+
+
+10) Be disappointed in that library's output:
+
+    function(d){
+      var r = "";
+      r += "Your ";
+      if(!d){
+        throw new Error("MessageFormat: No data passed to function.");
+      }
+      var lastkey_1 = "NUM";
+      var k_1=d[lastkey_1];
+      var off_0 = 0;
+      var pf_0 = { 
+        "one" : function(d){
+          var r = "";
+          r += "message goes";
+          return r;
+        },
+        "other" : function(d){
+          var r = "";
+          r += "messages go";
+          return r;
+        }
+      };
+      if ( pf_0[ k_1 + "" ] ) {
+        r += pf_0[ k_1 + "" ]( d ); 
+      }
+      else {
+        r += (pf_0[ MessageFormat.locale["en"]( k_1 - off_0 ) ] || pf_0[ "other" ] )( d );
+      }
+      r += " here.";
+      return r;
+    }
+                
+
+
+11. Refactor the library to produce this:
+
+    function(d) {
+        return "Your " +
+            plural(d.NUM, 0, pluralFuncs.en, {
+                one: function() { return "message goes";},
+                other: function() { return "messages go";} }) +
+            " here.";
+    }
+                
+
+
+12. Get commit access to messageformat.js
+                
+
+
+13. Actually use messageformat.js to support KonOpas in English, Finnish, and Swedish
+
+        "Listing {N, plural, one{one} other{#}}
+                 {LIVE, select, undefined{} other{current and future}}
+                 {N, plural, one{item} other{items}}
+                 {DAY, select, undefined{} other{
+                     on {DAY} {TIME, select, undefined{} other{after {TIME}}}
+                 }}
+                 {Q, select, undefined{} other{matching the query {Q}}}"
+                
+
+
+14. Get annoyed at the static language pluralisation functions included in
+    messageformat.js
+                
+
+
+15. Write make-plural.js, to read the Unicode CLDR Language Plural Rules
+
+    In:
+
+      supplemental["plurals-type-cardinal"]["en"]: {
+        "pluralRule-count-one": "i = 1 and v = 0",
+        "pluralRule-count-other": " "
+      }
+
+      supplemental["plurals-type-ordinal"]["en"]: {
+        "pluralRule-count-one": "n % 10 = 1 and n % 100 != 11",
+        "pluralRule-count-two": "n % 10 = 2 and n % 100 != 12",
+        "pluralRule-count-few": "n % 10 = 3 and n % 100 != 13",
+        "pluralRule-count-other": " "
+      }
+
+
+    Out:
+
+      function en(n, ord) {
+        var s = String(n).split('.'), v0 = !s[1], t0 = Number(s[0]) == n,
+            n10 = t0 && s[0].slice(-1), n100 = t0 && s[0].slice(-2);
+        if (ord) return (n10 == 1 && n100 != 11) ? 'one'
+            : (n10 == 2 && n100 != 12) ? 'two'
+            : (n10 == 3 && n100 != 13) ? 'few'
+            : 'other';
+        return (n == 1 && v0) ? 'one' : 'other';
+      }
+                
+
+
+16. Get messageformat.js compiler to include make-plural.js output in its output
+                
+
+
+17. Refactor make-plural.js completely in ES6 because Why Not?
+                
+
+
+18. Get involved in the JavaScript Globalization working group
+                
+
+
+19. Write a polyfill for Intl.PluralRules (stage-1 proposal, part of Ecma-402)
+                
+
+
+
+
+            simultaneously...
+                
+
+
+
+ 1) Have free time
+
+
+
+ 2) Decide to go to the 2012 World Science Fiction Convention (Worldcon) in Chicago
+                
+
+
+ 3) At the con, start a bid for Helsinki to host the Worldcon
+
+
+
+ 4) Campaign for three years across the world
+
+
+
+ 5) In August 2015, win the bid for Worldcon 2017!  =>  http://worldcon.fi/
+
+
+
+ 6) Run DevOps for Worldcon (and get other people to chair it)
+
+
