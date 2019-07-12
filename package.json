@@ -1,0 +1,13 @@
+{
+  "name": "@eemeli/talks",
+  "version": "1.0.0",
+  "private": true,
+  "author": "Eemeli Aro <eemeli@gmail.com>",
+  "description": "Talks and presentations by Eemeli Aro",
+  "scripts": {
+    "install": "git submodule update --init",
+    "start": "cd reveal.js && npm start -- --root=.."
+  },
+  "repository": "eemeli/talks",
+  "license": "UNLICENSED"
+}
