@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<link rel="stylesheet" href="../reveal.js/css/reset.css">
+		<link rel="stylesheet" href="../reveal.js/css/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/css/theme/night.css">
+		<link rel="stylesheet" href="../reveal.js/lib/css/monokai.css">
+		<style>
+			.reveal em { color: #888; font-style: normal; }
+			small { color: #888; }
+			.reveal pre code { font-size: 1.2em; line-height: 1.1; max-height: 100%; }
+			.next-left + * { text-align: left; }
+		</style>
+
+		<title>A Story of Intended Consequences and Plural Forms</title>
+	</head>
+
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section
+					data-markdown="slides.md"
+					data-separator-vertical="^\n\n\n"
+				></section>
+			</div>
+		</div>
+
+		<script src="../reveal.js/js/reveal.js"></script>
+		<script>
+			Reveal.initialize({
+				center: false,
+				controls: false,
+				controlsTutorial: false,
+				hash: true,
+				progress: false,
+				transition: 'fade', // none/fade/slide/convex/concave/zoom
+				transitionSpeed: 'fast', // default/fast/slow
+				dependencies: [
+					{ src: '../reveal.js/plugin/markdown/marked.js' },
+					{ src: '../reveal.js/plugin/markdown/markdown.js' },
+					{ src: '../reveal.js/plugin/notes/notes.js', async: true },
+					{ src: '../reveal.js/plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
