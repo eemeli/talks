@@ -1,0 +1,32 @@
+Just gave a talk on The UX of Configuration Files at the @grill_js conference in Wrocław, Poland. My slides are available online, and a thread follows with links for all the projects that I name-dropped. http://eemeli.org/talks/ux-of-config-files
+
+.properties is a simple, non-JSON config file format, mostly used in Java environments. See "dot-properties" on npm for a JS library. https://en.wikipedia.org/wiki/.properties
+
+For a better ini file experience, use TOML. Be aware that it'll get painful for complicated trees. https://github.com/toml-lang/toml
+
+If you're thinking of writing your config as XML, don't; use SDLang instead. It's remarkably similar to most Unix-y config formats. https://sdlang.org
+
+JSON isn't a config file format, though it's used like that all the time. If you do the same, at the very least allow JS comments with something like https://github.com/Microsoft/node-jsonc-parser
+
+Even better, JSON5 lets you write what looks like JavaScript, and \ escapes new lines for multi-line strings. https://json5.org
+
+Hjson is another more humane JSON-ish parser. Allows for indented multiline strings with ''' markers, and the JS implementation can include comments in its output. https://hjson.org
+
+I won't lie, I like YAML. Even if I needed to write my own library for it in order to support comments, and to properly handle all the different schemas. It completely complies with the spec, and has sane & safe defaults. https://eemeli.org/yaml
+
+StrictYAML pitches itself as a more bearable YAML subset, and allows for schema-based typing, while working within the YAML spec. https://hitchdev.com/strictyaml
+
+Dhall https://dhall-lang.org is a "programmable configuration language" and Jsonnet https://dhall-lang.org is a "data templating language". They get interesting in particular when you're dealing with Kubernetes or other such complications.
+
+CUE can also be used to generate complex configurations, but its primary pitch is as a "data constraint language", considering types as values and merging schemas with data. https://cuelang.org
+
+But if you're writing JavaScript, and even YAML seems to lack the power you need, why not just use JS as your config file format. There's no reason to learn or use another language. https://lmgtfy.com/?q=javascript
+
+If you're thinking of coming up with your own file format or library, you probably shouldn't. Sometimes, though, your Special Case really is that special. This applies to Project Fluent, which is evolving ICU MessageFormat in interesting ways. https://projectfluent.org
+
+Once you've read in your config, you should validate it. Probably with JSON Schema https://json-schema.org, even if your source format isn't JSON. To let others use it too, submit it to the JSON Schema Store http://schemastore.org/json/.
+
+For autocompletion & validation your editor probably supportes JSON Schema & the Schema Store. And it's not just for JSON; e.g. YAML support on VS Code is available with https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml
+
+And finally, you might not even need a config file, if your set of config parameters is small enough and you're using something like Yargs to provide a nice CLI with proper --help support. https://yargs.js.org
+

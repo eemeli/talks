@@ -801,3 +801,54 @@ pirate-parser <cmd> [args]
 eemeli.org/talks/ux-of-config-files</em>
 
 <img src="vincit.svg" style="background:none; border:none; box-shadow:none; width:250px">
+
+---
+
+<small>Extra! Extra!</small>
+
+### Shared Dependencies for Micro Frontends
+
+```js
+module.exports = {
+  externals: {
+    react: 'amd react',
+    'react-dom': 'amd react-dom'
+  },
+  output: {
+    libraryTarget: 'amd-require'
+  }
+}
+```
+
+```js
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+ReactDOM.render(...)
+```
+
+
+
+```sh
+curl -o vendor.js \
+  https://requirejs.org/docs/release/2.3.6/minified/require.js
+curl https://unpkg.com/react@16.9.0/umd/react.production.min.js | \
+  sed 's/define(/define("react",/' >> vendor.js
+curl https://unpkg.com/react-dom@16.9.0/umd/react-dom.production.min.js | \
+  sed 's/define(/define("react-dom",/' >> vendor.js
+```
+
+```html
+<head>
+  <script src="vendor.js"></script>
+  <script src="bundle.js"></script>
+</head>
+```
+
+```js
+require(
+  ["react", "react-dom"],
+  function(React, ReactDOM) {
+    ReactDOM.render(...)
+})
+```
