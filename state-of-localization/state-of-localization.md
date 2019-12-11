@@ -2,9 +2,7 @@
 
 ## The State of the Art in Localization
 
-<em><br>
-@eemeli_aro<br>
-github.com/eemeli</em>
+<em><code><br>npx eemeli</code></em>
 
 <img src="vincit.svg" style="background:none; border:none; box-shadow:none; width:250px">
 
@@ -18,70 +16,70 @@ github.com/eemeli</em>
 
 <small></small>
 
-### Toby’s photos
+### Mark’s photos
 
 ---
 
 <small></small>
 
-### Toby took 2566 photos
+### Mark took 1246 photos
 
 ---
 
 <small></small>
 
-### Toby took 2,566 photos
+### Mark took 1,246 photos
 
 ---
 
 <small></small>
 
-### Toby took 2,566 photos
-### on 10 July 2019
+### Mark took 1,246 photos
+### on 11 December 2019
 
 ---
 
-<small>Toby took <span style="color:white">2,566</span> photos on 10 July 2019</small>
+<small>Mark took <span style="color:white">1,246</span> photos on 11 December 2019</small>
 
 ### Intl.NumberFormat
 ```js
 const nf = new Intl.NumberFormat('en')
 
-nf.format(2566)
-// '2,566'
+nf.format(1246)
+// '1,246'
 ```
 
 ---
 
-<small>Toby took 2,566 photos on <span style="color:white">10 July 2019</span></small>
+<small>Mark took 1,246 photos on <span style="color:white">11 December 2019</span></small>
 
 ### Intl.DateTimeFormat
 ```js
-const date = new Date(2019, 6, 10) // months are fun.
+const date = new Date(2019, 11, 11) // months are fun.
 const opt = { day: 'numeric', month: 'long', year: 'numeric' }
 const dtf = new Intl.DateTimeFormat('en-GB', opt)
 
 dtf.format(date)
-// '10 July 2019'
+// '11 December 2019'
 ```
 
 ---
 
-<small>Toby took 2,566 photos on <span style="color:white">July 10, 2019</span></small>
+<small>Mark took 1,246 photos on <span style="color:white">December 11, 2019</span></small>
 
 ### Intl.DateTimeFormat
 ```js
-const date = new Date(2019, 6, 10) // months are fun.
+const date = new Date(2019, 11, 11) // months are fun.
 const opt = { day: 'numeric', month: 'long', year: 'numeric' }
 const dtf = new Intl.DateTimeFormat('en-US', opt)
 
 dtf.format(date)
-// 'July 10, 2019'
+// 'December 11, 2019'
 ```
 
 ---
 
-<small>Toby took 2,566 photos <span style="color:white">2 days ago</span></small>
+<small>Mark took 1,246 photos <span style="color:white">2 days ago</span></small>
 
 ### Intl.RelativeTimeFormat
 <small>Chrome 71 (2018 Dec), Firefox 65 (2019 Jan), Node 12 (2019 April)</small>
@@ -98,7 +96,7 @@ rtf.format(-2, 'day')
 <small></small>
 
 ### Intl.ListFormat
-<small>Chrome 72 (2019 Jan)</small>
+<small>Chrome 72 (2019 Jan), Node 12 (2019 April)</small>
 
 ```js
 const vehicles = ['Motorcycle', 'Bus', 'Car']
@@ -111,14 +109,14 @@ lf.format(vehicles)
 
 ---
 
-<small>Toby took 2,566 photos on 10 July 2019</small>
+<small>Mark took 1,246 photos on 11 December 2019</small>
 
 ### Intl.MessageFormat?
 <small>Not yet. :(</small>
 
 ---
 
-<small>Toby took 2,566 <span style="color:white">photos</span> on 10 July 2019</small>
+<small>Mark took 1,246 <span style="color:white">photos</span> on 11 December 2019</small>
 
 ### Intl.PluralRules
 
@@ -126,7 +124,7 @@ lf.format(vehicles)
 const pr = new Intl.PluralRules('en')
 
 pr.select(1)    // 'one' → 'photo'
-pr.select(2566) // 'other' → 'photos'
+pr.select(1246) // 'other' → 'photos'
 ```
 
 ---
@@ -141,7 +139,7 @@ const pr = new Intl.PluralRules('en', { type: 'ordinal' })
 pr.select(1)    // 'one' → '1st'
 pr.select(2)    // 'two' → '2nd'
 pr.select(3)    // 'few' → '3rd'
-pr.select(2566) // 'other' → '2566th'
+pr.select(1246) // 'other' → '1246th'
 pr.select(42)   // 'two' → '42nd'
 ```
 
@@ -152,6 +150,7 @@ pr.select(42)   // 'two' → '42nd'
 ### Message Formatting Libraries
 
 - FormatJS _– Yahoo (2014)_
+- Globalize _– OpenJS Foundation (2010)_
 - I18next _– Locize (2012)_
 - messageformat _– OpenJS Foundation (2012)_
 - Project Fluent _– Mozilla (2017)_
@@ -169,7 +168,21 @@ pr.select(42)   // 'two' → '42nd'
 
 ---
 
-<small>Toby took 2,566 photos on 10 July 2019</small>
+<small></small>
+
+### Translation Services
+
+- locize.com
+- lokalise.co
+- phraseapp.com
+- poeditor.com
+- transifex.com
+- weblate.org
+- ...
+
+---
+
+<small>Mark took 1,246 photos on 11 December 2019</small>
 
 ### ICU MessageFormat
 
@@ -177,17 +190,17 @@ pr.select(42)   // 'two' → '42nd'
 {name}’s photos
 ```
 
-```sh
+```js
 {name} took {numPhotos, plural,
   =0 {no photos}
   one {one photo}
-  other {{numPhotos, number} photos}
+  other {# photos}
 } on {timestamp, date, long}
 ```
 
 ---
 
-<small>Toby took 2566 photos on 10 July 2019</small>
+<small>Mark took 1246 photos on 11 December 2019</small>
 
 ### I18next Translations
 
@@ -205,7 +218,7 @@ _Alternatively, use `i18next-icu` for MessageFormat support_
 
 
 
-<small>Toby took 2566 photos on 10 July 2019</small>
+<small>Mark took 1246 photos on 11 December 2019</small>
 
 ### Polyglot.js Translations
 
@@ -220,7 +233,7 @@ _Alternatively, use `i18next-icu` for MessageFormat support_
 
 ---
 
-<small>Toby took 2,566 photos on 10 July 2019</small>
+<small>Mark took 1,246 photos on 11 December 2019</small>
 
 ### Project Fluent
 
@@ -240,7 +253,7 @@ photos-taken = {$name} took {$numPhotos ->
 
 ---
 
-<small>Toby took 2,566 photos on 10 July 2019</small>
+<small>Mark took 1,246 photos on 11 December 2019</small>
 
 ### Project Fluent
 
@@ -262,7 +275,7 @@ photos-taken = {$name} took {$numPhotos ->
 
 ---
 
-<small>Toby took 2,566 photos on 10 July 2019</small>
+<small>Mark took 1,246 photos on 11 December 2019</small>
 
 ### ICU MessageFormat
 
@@ -274,13 +287,13 @@ photos-taken = {$name} took {$numPhotos ->
 {name} took {numPhotos, plural,
   =0 {no photos}
   one {one photo}
-  other {{numPhotos, number} photos}
+  other {# photos}
 } on {timestamp, date, long}
 ```
 
 ---
 
-<small>Toby took 2,566 photos on 10 July 2019</small>
+<small>Mark took 1,246 photos on 11 December 2019</small>
 
 ### Messages in XLIFF
 
@@ -300,7 +313,7 @@ photos-taken = {$name} took {$numPhotos ->
           {name} took {numPhotos, plural,
             =0 {no photos}
             one {one photo}
-            other {{numPhotos, number} photos}
+            other {# photos}
           } on {timestamp, date, long}
         </source>
         <target>
@@ -312,9 +325,25 @@ photos-taken = {$name} took {$numPhotos ->
 </xliff>
 ```
 
+
+
+<small>Mark took 1,246 photos on 11 December 2019</small>
+
+### Messages in .properties
+
+```js
+photos-title = {name}’s photos
+photos-taken = \
+  {name} took {numPhotos, plural, \
+    =0 {no photos} \
+    one {one photo} \
+    other {# photos} \
+  } on {timestamp, date, long}
+```
+
 ---
 
-<small>Toby took 2,566 photos on 10 July 2019</small>
+<small>Mark took 1,246 photos on 11 December 2019</small>
 
 ### Messages in JSON
 
@@ -328,12 +357,12 @@ photos-taken = {$name} took {$numPhotos ->
 
 ---
 
-<small>Toby took 2,566 photos on 10 July 2019</small>
+<small>Mark took 1,246 photos on 11 December 2019</small>
 
 ### Messages in YAML
 
 ```yaml
-photos-title: "{name}’s photos"
+photos-title: '{name}’s photos'
 photos-taken: |
   {name} took {numPhotos, plural,
     =0 {no photos}
@@ -341,36 +370,6 @@ photos-taken: |
     other {{numPhotos, number} photos}
   } on {timestamp, date, long}
 ```
-
-
-
-<small>Toby took 2566 photos on 10 July 2019</small>
-
-### Messages in .properties
-
-```properties
-photos-title ={name}’s photos
-photos-taken = \
-  {name} took {numPhotos, plural, \
-    =0 {no photos} \
-    one {one photo} \
-    other {# photos} \
-  } on {timestamp, date, long}
-```
-
----
-
-<small></small>
-
-### Translation Services
-
-- locize.com
-- lokalise.co
-- phraseapp.com
-- poeditor.com
-- transifex.com
-- weblate.org
-- ...
 
 ---
 
@@ -384,7 +383,7 @@ photos-taken = \
 <small>webpack.config.js</small>
 
 ```sh
-npm i -D messageformat messageformat-loader
+npm i -D messageformat@next messageformat-loader@next
 ```
 
 ```js
@@ -405,16 +404,16 @@ module.exports = {
 
 ---
 
-<small><span style="color:white">Toby took 2,566 photos on 10 July 2019</span></small>
+<small><span style="color:white">Mark took 1,246 photos on 11 December 2019</span></small>
 
 ```js
 import messages from './messages.yaml'
 
 const msg = messages['photos-taken']
-const timestamp = new Date(2019, 6, 10)
+const timestamp = new Date(2019, 11, 11)
 
-msg({ name: 'Toby', numPhotos: 2566, timestamp })
-// 'Toby took 2,566 photos on 10 July 2019'
+msg({ name: 'Mark', numPhotos: 1246, timestamp })
+// 'Mark took 1,246 photos on 11 December 2019'
 ```
 
 
@@ -422,70 +421,95 @@ msg({ name: 'Toby', numPhotos: 2566, timestamp })
 <small></small>
 
 ```js
-function(e, n) {
-  var t = function(e, n) {
-    var t = String(e).split("."),
-        r = !t[1],
-        o = Number(t[0]) == e,
-        i = o && t[0].slice(-1),
-        u = o && t[0].slice(-2);
-    return n
-      ? 1 == i && 11 != u ? "one"
-        : 2 == i && 12 != u ? "two"
-        : 3 == i && 13 != u ? "few"
-        : "other"
-      : 1 == e && r ? "one" : "other"
-  },
-  r = function(e, n, t) {
-    var r = t && t.split(":") || [],
-        o = {
-          integer: { maximumFractionDigits: 0 },
-          percent: { style: "percent" },
-          currency: {
-            style: "currency",
-            currency: r[1] && r[1].trim() || "USD",
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-          }
-        };
-    return new Intl.NumberFormat(n, o[r[0]] || {}).format(e)
-  },
-  o = function(e, n, t) {
-    var r = { day: "numeric", month: "short", year: "numeric" };
-    switch (t) {
-      case "full": r.weekday = "long";
-      case "long": r.month = "long"; break;
-      case "short": r.month = "numeric"
-    }
-    return new Date(e).toLocaleDateString(n, r)
-  };
-  e.exports = {
-    "photos-title": function(e) {
-      return e.name + "’s photos"
-    },
-    "photos-taken": function(e) {
-      return e.name +
-        " took " +
-        function(e, n, t, r, o) {
-          if ({}.hasOwnProperty.call(r, e)) return r[e];
-          n && (e -= n);
-          var i = t(e, o);
-          return i in r ? r[i] : r.other
-        }(e.numPhotos, 0, t, {
-          0: "no photos",
-          one: "one photo",
-          other: r(e.numPhotos, "en") + " photos"
-        }) +
-        " on " +
-        o(e.timestamp, "en", " long".trim())
-      }
+!(function(e) {
+  var t = {}
+  function n(r) {
+    if (t[r]) return t[r].exports
+    var o = (t[r] = { i: r, l: !1, exports: {} })
+    return e[r].call(o.exports, o, o.exports, n), (o.l = !0), o.exports
   }
-}
+  ;(n.m = e),
+    (n.c = t),
+    (n.d = function(e, t, r) {
+      n.o(e, t) || Object.defineProperty(e, t, { enumerable: !0, get: r })
+    }),
+    (n.r = function(e) {
+      'undefined' != typeof Symbol &&
+        Symbol.toStringTag &&
+        Object.defineProperty(e, Symbol.toStringTag, { value: 'Module' }),
+        Object.defineProperty(e, '__esModule', { value: !0 })
+    }),
+    (n.t = function(e, t) {
+      if ((1 & t && (e = n(e)), 8 & t)) return e
+      if (4 & t && 'object' == typeof e && e && e.__esModule) return e
+      var r = Object.create(null)
+      if (
+        (n.r(r),
+        Object.defineProperty(r, 'default', { enumerable: !0, value: e }),
+        2 & t && 'string' != typeof e)
+      )
+        for (var o in e) n.d(r, o, function(t) { return e[t] }.bind(null, o))
+      return r
+    }),
+    (n.n = function(e) {
+      var t = e && e.__esModule
+        ? function() { return e.default }
+        : function() { return e }
+      return n.d(t, 'a', t), t
+    }),
+    (n.o = function(e, t) {
+      return Object.prototype.hasOwnProperty.call(e, t)
+    }),
+    (n.p = ''),
+    n((n.s = 0))
+})([
+  function(e, t, n) {
+    'use strict'
+    function r(e) { return r[e] || (r[e] = new Intl.NumberFormat(e)) }
+    function o(e) {
+      var t = !String(e).split('.')[1]
+      return 1 == e && t ? 'one' : 'other'
+    }
+    n.r(t)
+    const u = o
+    ;(function(e) {
+      return (
+        e.name + ' took ' +
+        (function(e, t, n, r, o) {
+          if ({}.hasOwnProperty.call(r, e)) return r[e]
+          t && (e -= t)
+          var u = n(e, o)
+          return u in r ? r[u] : r.other
+        })(e.numPhotos, 0, u, {
+          0: 'no photos',
+          one: 'one photo',
+          other:
+            ((t = 'en-GB'),
+            (n = e.numPhotos),
+            (o = 0),
+            r(t).format(n - o) + ' photos')
+        }) + ' on ' +
+        (function(e, t, n) {
+          var r = { day: 'numeric', month: 'short', year: 'numeric' }
+          switch (n) {
+            case 'full': r.weekday = 'long'
+            case 'long': r.month = 'long'
+              break
+            case 'short': r.month = 'numeric'
+          }
+          return new Date(e).toLocaleDateString(t, r)
+        })(e.timestamp, 'en-GB', ' long'.trim()) +
+        '\n'
+      )
+      var t, n, o
+    })({ name: 'Mark', numPhotos: 1246, timestamp: new Date(2019, 11, 11) })
+  }
+])
 ```
 
 ---
 
-<small><span style="color:white">Toby took 2,566 photos on 10 July 2019</span></small>
+<small><span style="color:white">Mark took 1,246 photos on 11 December 2019</span></small>
 
 ```sh
 npm i react-message-context
@@ -493,19 +517,20 @@ npm i react-message-context
 
 ```js
 import React from 'react'
-import { Message, MessageProvider } from 'react-message-context'
+import { MessageProvider, useMessage } from 'react-message-context'
 import messages from './messages.yaml'
 
-const Toby = ({ numPhotos, timestamp }) =>
-  <Message id="photos-taken" name="Toby"
-    numPhotos={numPhotos} timestamp={timestamp} />
+function Mark({ numPhotos, timestamp }) {
+  const msg = useMessage('photos-taken')
+  return msg({ name: 'Mark', numPhotos, timestamp })
+}
 
-export const TobyApp = () =>
+export const MarkApp = () =>
   <MessageProvider messages={messages}>
-    <Toby numPhotos={2566} timestamp={new Date(2019, 6, 10)} />
+    <Mark numPhotos={1246} timestamp={new Date(2019, 11, 11)} />
   </MessageProvider>
 
-// 'Toby took 2,566 photos on 10 July 2019'
+// 'Mark took 1,246 photos on 11 December 2019'
 ```
 
 ---
@@ -522,9 +547,9 @@ export function msg(strings, ...values) {
   return res + strings[strings.length - 1]
 }
 
-const name = 'Toby'
-msg(name + '’s photos') // 'Toby’s photos'
-msg`${name}’s photos`   // 'Toby’s photos'
+const name = 'Mark'
+msg(name + '’s photos') // 'Mark’s photos'
+msg`${name}’s photos`   // 'Mark’s photos'
 ```
 
 
@@ -536,8 +561,8 @@ import React from 'react'
 
 export const Msg = ({ children }) => children
 
-function TobyTitle() {
-  const name = 'Toby'
+function MarkTitle() {
+  const name = 'Mark'
   return <Msg>{name}’s photos</Msg>
 }
 ```
