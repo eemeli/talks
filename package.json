@@ -8,6 +8,10 @@
     "install": "git submodule update --init",
     "start": "cd reveal.js && npm start -- --root=.."
   },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  },
   "repository": "eemeli/talks",
   "license": "UNLICENSED"
 }
