@@ -2,9 +2,7 @@
 
 ## The UX of Configuration Files
 
-<em><br>
-@eemeli_aro<br>
-github.com/eemeli</em>
+<em><code><br>npx eemeli</code></em>
 
 <img src="vincit.svg" style="background:none; border:none; box-shadow:none; width:250px">
 
@@ -502,6 +500,25 @@ module.exports = {
     ]
   }
 }
+```
+
+
+
+<small></small>
+
+### Python
+
+```python
+import preprocessing
+
+mysql = {'host': 'localhost',
+         'user': 'root',
+         'passwd': 'my secret password',
+         'db': 'write-math'}
+preprocessing_queue = [preprocessing.scale_and_center,
+                       preprocessing.dot_reduction,
+                       preprocessing.connect_lines]
+use_anonymous = True
 ```
 
 ---

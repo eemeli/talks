@@ -1,7 +1,6 @@
 ## A Story of Intended Consequences<br>and Plural Forms
 
-_<br><br>
-Eemeli Aro_
+<em><code><br>npx eemeli</code></em>
 
 <img src="vincit.svg" style="background:none; border:none; box-shadow:none; width:250px">
 
@@ -9,7 +8,7 @@ Eemeli Aro_
 
 <small></small>
 
-## _This is_<br>one talk<br>_in a series of_<br>many talks
+## _This is_<br>one lightning talk<br>_in a series of_<br>many talks
 
 ---
 
@@ -17,9 +16,15 @@ Eemeli Aro_
 
 ```text
 {unread, plural,
-    =0 {You've reached inbox zero!}
-    one  {You have one unread email.}
-    other  {You have # unread emails.}
+     =0    {You've reached inbox zero!}
+     one   {You have one unread email.}
+     other {You have # unread emails.}
+}
+
+{gender, select,
+     male    {His inbox}
+     female  {Her inbox}
+     other {Their inbox}
 }
 ```
 
@@ -29,9 +34,15 @@ Eemeli Aro_
 
 ```text
 { $unread ->
-    [0] You've reached inbox zero!
-    [one] You have one unread email.
+    [0]     You've reached inbox zero!
+    [one]   You have one unread email.
    *[other] You have { $unread } unread emails.
+}
+
+{ $gender ->
+    [male]    His inbox
+    [female]  Her inbox
+   *[other] Their inbox
 }
 ```
 
@@ -86,7 +97,7 @@ scoreMessage({ score: 42 });
 
 <small></small>
 
-## _Next up is the_<br>third break<br>_of the_<br>first PromptConf
+## _Tomorrow is the_<br>third day<br>_of the_<br>14th CodeMash
 
 ---
 
@@ -94,11 +105,25 @@ scoreMessage({ score: 42 });
 
 ```text
 {pos, selectordinal,
-   =1 {You finished first!}
-   one  {You finished #st}
-   two  {You finished #nd}
-   few  {You finished #rd}
-   other  {You finished #th}
+    =1    {You finished first!}
+    one   {You finished #st}
+    two   {You finished #nd}
+    few   {You finished #rd}
+    other {You finished #th}
+}
+```
+
+---
+
+<small>Project Fluent</small>
+
+```text
+{ ORDINAL($pos) ->
+   [1]     You finished first!
+   [one]   You finished {$pos}st
+   [two]   You finished {$pos}nd
+   [few]   You finished {$pos}rd
+  *[other] You finished {$pos}th
 }
 ```
 
@@ -108,13 +133,15 @@ scoreMessage({ score: 42 });
 
 ```text
 { NUMBER($pos, type: "ordinal") ->
-   [1] You finished first!
-   [one] You finished {$pos}st
-   [two] You finished {$pos}nd
-   [few] You finished {$pos}rd
+   [1]     You finished first!
+   [one]   You finished {$pos}st
+   [two]   You finished {$pos}nd
+   [few]   You finished {$pos}rd
   *[other] You finished {$pos}th
 }
 ```
+
+<small>github.com/projectfluent/fluent/pull/259</small>
 
 ---
 
@@ -143,7 +170,7 @@ NUMBER(42, minimumFractionDigits: 1, type: "ordinal")
 ```js
 const nf = new Intl.NumberFormat('en', {
   minimumFractionDigits: 1,
-  type: 'ordinal'
+  type: 'ordinal' // ⬅ not a NumberFormat option!
 });
 
 nf.format(42); // '42.0'
