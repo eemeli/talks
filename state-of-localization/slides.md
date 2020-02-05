@@ -2,9 +2,19 @@
 
 ## The State of the Art in Localization
 
-<em><code><br>npx eemeli</code></em>
+<em><br>Eemeli Aro<br><code>npx eemeli</code></em>
 
-<img src="vincit.svg" style="background:none; border:none; box-shadow:none; width:250px">
+---
+
+<div style="position:relative">
+<img src="vincit-at-work.jpg" style="border:none; box-shadow:none; display:block; margin: auto">
+</div>
+
+---
+
+<div style="position:relative">
+<img src="openjsf.png" style="background:none; border:none; box-shadow:none; display:block; margin: 120px auto">
+</div>
 
 ---
 
@@ -16,30 +26,30 @@
 
 <small></small>
 
-### Mark’s photos
+### Tim’s photos
 
 ---
 
 <small></small>
 
-### Mark took 1246 photos
+### Tim took 1246 photos
 
 ---
 
 <small></small>
 
-### Mark took 1,246 photos
+### Tim took 1,246 photos
 
 ---
 
 <small></small>
 
-### Mark took 1,246 photos
-### on 11 December 2019
+### Tim took 1,246 photos
+### on 5 February 2020
 
 ---
 
-<small>Mark took <span style="color:white">1,246</span> photos on 11 December 2019</small>
+<small>Tim took <span style="color:white">1,246</span> photos on 5 February 2020</small>
 
 ### Intl.NumberFormat
 ```js
@@ -51,35 +61,35 @@ nf.format(1246)
 
 ---
 
-<small>Mark took 1,246 photos on <span style="color:white">11 December 2019</span></small>
+<small>Tim took 1,246 photos on <span style="color:white">5 February 2020</span></small>
 
 ### Intl.DateTimeFormat
 ```js
-const date = new Date(2019, 11, 11) // months are fun.
+const date = new Date(2020, 1, 5) // months are fun.
 const opt = { day: 'numeric', month: 'long', year: 'numeric' }
 const dtf = new Intl.DateTimeFormat('en-GB', opt)
 
 dtf.format(date)
-// '11 December 2019'
+// '5 February 2020'
 ```
 
 ---
 
-<small>Mark took 1,246 photos on <span style="color:white">December 11, 2019</span></small>
+<small>Tim took 1,246 photos on <span style="color:white">February 5, 2020</span></small>
 
 ### Intl.DateTimeFormat
 ```js
-const date = new Date(2019, 11, 11) // months are fun.
+const date = new Date(2020, 1, 5) // months are fun.
 const opt = { day: 'numeric', month: 'long', year: 'numeric' }
 const dtf = new Intl.DateTimeFormat('en-US', opt)
 
 dtf.format(date)
-// 'December 11, 2019'
+// 'February 5, 2020'
 ```
 
 ---
 
-<small>Mark took 1,246 photos <span style="color:white">2 days ago</span></small>
+<small>Tim took 1,246 photos <span style="color:white">2 days ago</span></small>
 
 ### Intl.RelativeTimeFormat
 <small>Chrome 71 (2018 Dec), Firefox 65 (2019 Jan), Node 12 (2019 April)</small>
@@ -109,16 +119,37 @@ lf.format(vehicles)
 
 ---
 
-<small>Mark took 1,246 photos on 11 December 2019</small>
+<small><span style="color:white">Tim took 1,246 photos on 5 February 2020</span></small>
+
+### Intl.MessageFormat?
+
+
+
+<small>Tim took 1,246 photos on 5 February 2020</small>
 
 ### Intl.MessageFormat?
 <small>Not yet. :(</small>
 
 ---
 
-<small>Mark took 1,246 <span style="color:white">photos</span> on 11 December 2019</small>
+<small>Tim took 1,246 <span style="color:white">photos</span> on 5 February 2020</small>
 
 ### Intl.PluralRules
+<small>Chrome 63 (2017 Dec), Firefox 58 (2018 Jan), Node 10 (2018 April)</small>
+
+```js
+const pr = new Intl.PluralRules('en')
+
+pr.select(1)    // 'one'
+pr.select(1246) // 'other'
+```
+
+
+
+<small>Tim took 1,246 <span style="color:white">photos</span> on 5 February 2020</small>
+
+### Intl.PluralRules
+<small>Chrome 63 (2017 Dec), Firefox 58 (2018 Jan), Node 10 (2018 April)</small>
 
 ```js
 const pr = new Intl.PluralRules('en')
@@ -126,6 +157,8 @@ const pr = new Intl.PluralRules('en')
 pr.select(1)    // 'one' → 'photo'
 pr.select(1246) // 'other' → 'photos'
 ```
+
+<small><br>Polyfill available as `intl-pluralrules`</small>
 
 ---
 
@@ -168,27 +201,40 @@ pr.select(42)   // 'two' → '42nd'
 
 ---
 
-<small></small>
+<small><span style="color:white">Tim took 1246 photos on 5 February 2020</span></small>
 
-### Translation Services
+### I18next Translations
 
-- locize.com
-- lokalise.co
-- phraseapp.com
-- poeditor.com
-- transifex.com
-- weblate.org
-- ...
+```json
+{
+  "photos": "one photo",
+  "photos_plural": "{{count}} photos",
+  "photos-taken":
+    "{{name}} took $t(photos, {'count': {{numPhotos}} }) on {{timestamp}}"
+}
+```
+
+<small><br>Alternatively, use `i18next-icu` for MessageFormat support</small>
 
 ---
 
-<small>Mark took 1,246 photos on 11 December 2019</small>
+<small><span style="color:white">Tim took 1246 photos on 5 February 2020</span></small>
+
+### Polyglot.js Translations
+
+```json
+{
+  "photos": "one photo |||| %{numPhotos} photos",
+  "photos-taken":
+    "%{name} took %{photos_as_string} on %{timestamp_as_string}"
+}
+```
+
+---
+
+<small><span style="color:white">Tim took 1,246 photos on 5 February 2020</span></small>
 
 ### ICU MessageFormat
-
-```sh
-{name}’s photos
-```
 
 ```js
 {name} took {numPhotos, plural,
@@ -200,46 +246,11 @@ pr.select(42)   // 'two' → '42nd'
 
 ---
 
-<small>Mark took 1246 photos on 11 December 2019</small>
-
-### I18next Translations
-
-```json
-{
-  "photos-title": "{{name}}’s photos",
-  "photos": "one photo",
-  "photos_plural": "{{count}} photos",
-  "photos-taken":
-    "{{name}} took $t(photos, {'count': {{numPhotos}} }) on {{timestamp}}"
-}
-```
-
-_Alternatively, use `i18next-icu` for MessageFormat support_
-
-
-
-<small>Mark took 1246 photos on 11 December 2019</small>
-
-### Polyglot.js Translations
-
-```json
-{
-  "photos-title": "%{name}’s photos",
-  "photos": "one photo |||| %{numPhotos} photos",
-  "photos-taken":
-    "%{name} took %{photos_as_string} on %{timestamp_as_string}"
-}
-```
-
----
-
-<small>Mark took 1,246 photos on 11 December 2019</small>
+<small><span style="color:white">Tim took 1,246 photos on 5 February 2020</span></small>
 
 ### Project Fluent
 
 ```sh
-photos-title = {$name}’s photos
-
 photos-taken = {$name} took {$numPhotos ->
    [0] no photos
    [one] one photo
@@ -253,13 +264,11 @@ photos-taken = {$name} took {$numPhotos ->
 
 ---
 
-<small>Mark took 1,246 photos on 11 December 2019</small>
+<small><span style="color:white">Tim took 1,246 photos on 5 February 2020</span></small>
 
 ### Project Fluent
 
 ```sh
-photos-title = {$name}’s photos
-
 long-date = {DATETIME($timestamp,
   day: "numeric",
   month: "long",
@@ -275,25 +284,21 @@ photos-taken = {$name} took {$numPhotos ->
 
 ---
 
-<small>Mark took 1,246 photos on 11 December 2019</small>
+<small></small>
 
-### ICU MessageFormat
+### Translation Services
 
-```sh
-{name}’s photos
-```
-
-```
-{name} took {numPhotos, plural,
-  =0 {no photos}
-  one {one photo}
-  other {# photos}
-} on {timestamp, date, long}
-```
+- locize.com
+- lokalise.co
+- phraseapp.com
+- poeditor.com
+- transifex.com
+- weblate.org
+- ...
 
 ---
 
-<small>Mark took 1,246 photos on 11 December 2019</small>
+<small>Tim took 1,246 photos on 5 February 2020</small>
 
 ### Messages in XLIFF
 
@@ -325,9 +330,9 @@ photos-taken = {$name} took {$numPhotos ->
 </xliff>
 ```
 
+---
 
-
-<small>Mark took 1,246 photos on 11 December 2019</small>
+<small>Tim took 1,246 photos on 5 February 2020</small>
 
 ### Messages in .properties
 
@@ -343,7 +348,7 @@ photos-taken = \
 
 ---
 
-<small>Mark took 1,246 photos on 11 December 2019</small>
+<small>Tim took 1,246 photos on 5 February 2020</small>
 
 ### Messages in JSON
 
@@ -357,7 +362,7 @@ photos-taken = \
 
 ---
 
-<small>Mark took 1,246 photos on 11 December 2019</small>
+<small>Tim took 1,246 photos on 5 February 2020</small>
 
 ### Messages in YAML
 
@@ -404,21 +409,21 @@ module.exports = {
 
 ---
 
-<small><span style="color:white">Mark took 1,246 photos on 11 December 2019</span></small>
+<small><span style="color:white">Tim took 1,246 photos on 5 February 2020</span></small>
 
 ```js
 import messages from './messages.yaml'
 
 const msg = messages['photos-taken']
-const timestamp = new Date(2019, 11, 11)
+const timestamp = new Date(2020, 1, 5)
 
-msg({ name: 'Mark', numPhotos: 1246, timestamp })
-// 'Mark took 1,246 photos on 11 December 2019'
+msg({ name: 'Tim', numPhotos: 1246, timestamp })
+// 'Tim took 1,246 photos on 5 February 2020'
 ```
 
 ---
 
-<small><span style="color:white">Mark took 1,246 photos on 11 December 2019</span></small>
+<small><span style="color:white">Tim took 1,246 photos on 5 February 2020</span></small>
 
 ```sh
 npm i react-message-context
@@ -429,17 +434,17 @@ import React from 'react'
 import { MessageProvider, useMessage } from 'react-message-context'
 import messages from './messages.yaml'
 
-function Mark({ numPhotos, timestamp }) {
+function Tim({ numPhotos, timestamp }) {
   const msg = useMessage('photos-taken')
-  return msg({ name: 'Mark', numPhotos, timestamp })
+  return msg({ name: 'Tim', numPhotos, timestamp })
 }
 
-export const MarkApp = () =>
+export const TimApp = () =>
   <MessageProvider messages={messages}>
-    <Mark numPhotos={1246} timestamp={new Date(2019, 11, 11)} />
+    <Tim numPhotos={1246} timestamp={new Date(2020, 1, 5)} />
   </MessageProvider>
 
-// 'Mark took 1,246 photos on 11 December 2019'
+// 'Tim took 1,246 photos on 5 February 2020'
 ```
 
 ---
@@ -456,9 +461,9 @@ export function msg(strings, ...values) {
   return res + strings[strings.length - 1]
 }
 
-const name = 'Mark'
-msg(name + '’s photos') // 'Mark’s photos'
-msg`${name}’s photos`   // 'Mark’s photos'
+const name = 'Tim'
+msg(name + '’s photos') // 'Tim’s photos'
+msg`${name}’s photos`   // 'Tim’s photos'
 ```
 
 
@@ -470,8 +475,8 @@ import React from 'react'
 
 export const Msg = ({ children }) => children
 
-function MarkTitle() {
-  const name = 'Mark'
+function TimTitle() {
+  const name = 'Tim'
   return <Msg>{name}’s photos</Msg>
 }
 ```
@@ -484,6 +489,6 @@ function MarkTitle() {
 
 <em><br>
 @eemeli_aro<br>
-github.com/eemeli</em>
+eemeli.org/talks/state-of-localization</em>
 
 <img src="vincit.svg" style="background:none; border:none; box-shadow:none; width:250px">
