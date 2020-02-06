@@ -123,14 +123,14 @@ lf.format(vehicles)
 
 ### Intl.MessageFormat?
 
-
+---
 
 <small>Tim took 1,246 photos on 5 February 2020</small>
 
 ### Intl.MessageFormat?
 <small>Not yet. :(</small>
 
-
+---
 
 <small><span style="color:white">Tim took 1,246 photos on 5 February 2020</span></small>
 
@@ -154,7 +154,7 @@ pr.select(1)    // 'one'
 pr.select(1246) // 'other'
 ```
 
-
+---
 
 <small>Tim took 1,246 <span style="color:white">photos</span> on 5 February 2020</small>
 
@@ -476,7 +476,7 @@ msg(name + '’s photos') // 'Tim’s photos'
 msg`${name}’s photos`   // 'Tim’s photos'
 ```
 
-
+---
 
 <small>It can be just as dumb in React.</small>
 
