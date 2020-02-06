@@ -65,10 +65,10 @@ nf.format(1246)
 
 ### Intl.DateTimeFormat
 ```js
-const date = new Date(2020, 1, 5) // months are fun.
 const opt = { day: 'numeric', month: 'long', year: 'numeric' }
 const dtf = new Intl.DateTimeFormat('en-GB', opt)
 
+const date = new Date(2020, 1, 5) // months are fun.
 dtf.format(date)
 // '5 February 2020'
 ```
@@ -79,10 +79,10 @@ dtf.format(date)
 
 ### Intl.DateTimeFormat
 ```js
-const date = new Date(2020, 1, 5) // months are fun.
 const opt = { day: 'numeric', month: 'long', year: 'numeric' }
 const dtf = new Intl.DateTimeFormat('en-US', opt)
 
+const date = new Date(2020, 1, 5) // months are fun.
 dtf.format(date)
 // 'February 5, 2020'
 ```
@@ -109,10 +109,10 @@ rtf.format(-2, 'day')
 <small>Chrome 72 (2019 Jan), Node 12 (2019 April)</small>
 
 ```js
-const vehicles = ['Motorcycle', 'Bus', 'Car']
 const opt = { style: 'long', type: 'conjunction' }
 const lf = new Intl.ListFormat('en', opt)
 
+const vehicles = ['Motorcycle', 'Bus', 'Car']
 lf.format(vehicles)
 // 'Motorcycle, Bus, and Car'
 ```
@@ -129,6 +129,16 @@ lf.format(vehicles)
 
 ### Intl.MessageFormat?
 <small>Not yet. :(</small>
+
+
+
+<small><span style="color:white">Tim took 1,246 photos on 5 February 2020</span></small>
+
+### Intl.MessageFormat?
+
+<small>But soon!</small>
+
+github.com/unicode-org/message-format-wg
 
 ---
 
@@ -480,6 +490,17 @@ function TimTitle() {
   return <Msg>{name}’s photos</Msg>
 }
 ```
+
+---
+
+<small>Too long; didn't listen</small>
+
+* Fixing localization earlier is less work.
+* When you can, use standard features.
+* Don't roll your own message formatter.
+* Message data is really rather simple.
+* Translators are not engineers.
+* If you care, participate! Not enough people care.
 
 ---
 
